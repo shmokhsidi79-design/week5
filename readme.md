@@ -1,1 +1,0 @@
-weekly project + bonus project
