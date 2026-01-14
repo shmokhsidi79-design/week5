@@ -93,7 +93,7 @@ Reduce cross-category noise
 
 Visualize embeddings using PCA or TSNE
 
-2️⃣ TF-IDF from Scratch (NLP)
+# 2️⃣ TF-IDF from Scratch (NLP)
 This project implements TF, IDF, and TF-IDF from scratch using Python and compares the results with scikit-learn.
 
 Dataset / Corpus
@@ -136,7 +136,7 @@ Rare words (web, cats, dogs) get higher TF-IDF
 
 Frequent words (i) get lower TF-IDF (IDF ≈ 0)
 
-3️⃣ Arabic Word2Vec – Supermarket Recommendation (Bonus)
+# 3️⃣ Arabic Word2Vec – Supermarket Recommendation (Bonus)
 This mini-project applies Word2Vec to an Arabic dataset of supermarket shopping baskets.
 
 Each basket = sentence
