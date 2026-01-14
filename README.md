@@ -48,6 +48,3 @@ Rare words like web, development, cats, hate, dogs get higher TF-IDF.
 
 Frequent words like i get lower (IDF becomes 0).
 
-
-Copy code
-pip install scikit-learn
