@@ -1,16 +1,18 @@
 # WEEK 5 – NLP Projects
 
-This repository contains **two NLP projects** implemented from scratch:
-1. **Word2Vec Book Recommendation System**
+This repository contains **three NLP projects** implemented from scratch:
+
+1. **Word2Vec – Book Recommendation System**
 2. **TF-IDF from Scratch**
+3. **Arabic Word2Vec – Supermarket Recommendation (Bonus)**
 
 ---
 
-# 1️⃣ Word2Vec Book Recommendation System
+# 1️⃣ Word2Vec – Book Recommendation System
 
 This project builds a simple **book recommendation system** using **Word2Vec embeddings** from the `gensim` library.
 
-The idea is:
+### Idea
 - Each **reading list** is treated as a *sentence*
 - Each **book title** is treated as a *token*
 - Books that appear together in reading lists learn similar vector representations
@@ -46,6 +48,8 @@ Example reading list:
 Model Configuration
 python
 Copy code
+from gensim.models import Word2Vec
+
 model = Word2Vec(
     sentences=reading_lists,
     vector_size=30,
@@ -78,7 +82,7 @@ def recommend_books(book, top_n=4):
 Notes
 Because the dataset is small, some recommendations may look inconsistent
 
-Increasing the number of reading lists will improve results
+Increasing the number of reading lists improves results
 
 Possible Improvements
 Expand dataset to 50+ reading lists
@@ -90,12 +94,7 @@ Reduce cross-category noise
 Visualize embeddings using PCA or TSNE
 
 2️⃣ TF-IDF from Scratch (NLP)
-This project implements TF, IDF, and TF-IDF from scratch using Python, then compares the results with scikit-learn.
-
-Project Files
-TF_TFIDF_From_Scratch.ipynb — full notebook implementation
-
-README.md — project overview
+This project implements TF, IDF, and TF-IDF from scratch using Python and compares the results with scikit-learn.
 
 Dataset / Corpus
 python
@@ -126,26 +125,27 @@ Doc	cats	development	dogs	hate	love	web
 2	0.0	0.0	2.098612	2.098612	0.0	0.0
 
 Why Numbers Differ (Expected)
-scikit-learn uses slightly different internal scaling
+scikit-learn uses different internal scaling
 
-Tokenization rules differ from a simple .split()
+Tokenization differs from a simple .split()
 
-Despite this, results remain correlated
+Results remain correlated
 
 Observations
 Rare words (web, cats, dogs) get higher TF-IDF
 
-# 3️⃣ Arabic Word2Vec – Supermarket Recommendation (Bonus)
+Frequent words (i) get lower TF-IDF (IDF ≈ 0)
 
-This mini-project applies **Word2Vec** to an Arabic dataset of supermarket shopping baskets.
-Each basket is treated as a “sentence” and each product is treated as a “token”.
-Products that appear together in the same basket become closer in the embedding space.
+3️⃣ Arabic Word2Vec – Supermarket Recommendation (Bonus)
+This mini-project applies Word2Vec to an Arabic dataset of supermarket shopping baskets.
 
----
+Each basket = sentence
 
-## Dataset (Shopping Baskets)
+Each product = token
 
-```python
+Dataset (Shopping Baskets)
+python
+Copy code
 shopping_baskets = [
     ["تمر", "زبادي_يوناني", "فطور_الصباح"],
     ["رز", "دجاج"],
@@ -180,7 +180,8 @@ def recommend(item, top_n=4):
     for x, score in model.wv.most_similar(item, topn=top_n):
         print(f"- {x} (تشابه: {score:.2f})")
 Sample Output
-Recommendations for تمر
+Recommendations for تمر:
+
 ثوم (0.12)
 
 عنب (0.08)
@@ -189,7 +190,8 @@ Recommendations for تمر
 
 قهوة (0.02)
 
-Recommendations for دجاج
+Recommendations for دجاج:
+
 طماطم (0.22)
 
 رز (0.09)
@@ -198,16 +200,12 @@ Recommendations for دجاج
 
 خبز (0.08)
 
-Handling unknown item (بطيخ)
-The system correctly detects when an item is not in the vocabulary and prints available items.
+Handling unknown item (بطيخ):
+
+The system correctly detects unseen items and prints available options.
 
 Notes
-Similarity scores are relatively low because the dataset is small (only 6 baskets).
+Similarity scores are low due to the small dataset (6 baskets)
 
-Increasing the number of baskets (30–100+) and using a smaller vector_size (e.g., 20–50) will typically improve recommendations.
+Increasing baskets (30–100+) and reducing vector_size improves results
 
-yaml
-Copy code
-
-
-Frequent words (i) get lower TF-IDF (IDF ≈ 0)
