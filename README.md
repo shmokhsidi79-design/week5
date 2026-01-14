@@ -1,6 +1,6 @@
-##WEEK5
+# WEEK5
 
-# TF-IDF from Scratch (NLP)
+## TF-IDF from Scratch (NLP)
 
 This project implements **TF (Term Frequency)**, **IDF (Inverse Document Frequency)**, and **TF-IDF** from scratch using Python, then compares the results with **scikit-learn**.
 
