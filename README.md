@@ -156,100 +156,52 @@ Similarity scores are low due to the small dataset.
 Increasing the number of baskets and reducing vector size will improve results.
 
 ---
-#  Animal Recommendation System using Word2Vec Embeddings
+# Animal Recommendation System using Word2Vec Embeddings
 
-##  Project Overview
-This project demonstrates how **embeddings** can be used to build a simple **recommendation system** outside of traditional NLP tasks.  
-Instead of words and sentences, we model:
+## Project Overview
+This project demonstrates how embedding techniques can be applied to build a recommendation system using non-text data.
+Instead of traditional NLP inputs, the system models:
 
-- **Animal names** as tokens (words)
-- **Animal groups (classes)** as sentences
+- Animal names as tokens
+- Animal groups (biological classes) as sentences
 
-Using this approach, we train a **Word2Vec model** that learns relationships between animals based on their co-occurrence within the same group.
-
-The final system can recommend animals that are **similar or related** to a given animal.
+A Word2Vec model is trained to learn relationships between animals based on their co-occurrence within the same group.
+The trained embeddings are then used to recommend animals that are similar to a given animal.
 
 ---
 
+## Dataset
+Source: Kaggle – Zoo Animal Classification Dataset  
+File used: zoo.csv  
 
-##  Dataset
-- **Source:** Kaggle – Zoo Animal Classification Dataset  
-- **File:** `zoo.csv`
-- **Number of animals:** 101
-- **Classes:** 7 animal categories
+The dataset contains 101 animals classified into 7 biological categories.
 
-### Key Columns
-- `animal_name`: Name of the animal
-- `class_type`: Biological class label
+Main columns:
+- animal_name: Name of the animal
+- class_type: Biological class label
 
 Class types:
-1. Mammal  
-2. Bird  
-3. Reptile  
-4. Fish  
-5. Amphibian  
-6. Bug  
-7. Invertebrate  
+1. Mammal
+2. Bird
+3. Reptile
+4. Fish
+5. Amphibian
+6. Bug
+7. Invertebrate
 
 ---
 
-## 🔧 Data Preparation
-We transform the dataset into a format suitable for Word2Vec:
+## Data Preparation
+The dataset is transformed into a format compatible with Word2Vec.
 
-- Each `class_type` becomes a **sentence**
-- Each `animal_name` becomes a **token**
+- Each biological class is treated as one sentence
+- Each animal name is treated as a token
 
-```python
-sentences = (
-    df.groupby("class_type")["animal_name"]
-    .apply(list)
-    .tolist()
-)
-This produces a list of lists, which is the required input format for Word2Vec.
 
- Model Training
-We use Gensim's Word2Vec implementation to train embeddings.
+## Results
+Animal embeddings were successfully trained
 
-python
-Copy code
-from gensim.models import Word2Vec
+The model produced logical similarity-based recommendations
 
-model = Word2Vec(
-    sentences,
-    vector_size=32,
-    window=5,
-    min_count=1,
-    workers=4
-)
-Key Parameters
-vector_size: Dimensionality of animal embeddings
-
-window: Context window size
-
-min_count: Includes all animals
-
-workers: Parallel training threads
-
- Recommendation Example
-Once trained, the model can recommend animals similar to a given one:
-
-python
-Copy code
-model.wv.most_similar("lion")
-Example Output
-nginx
-Copy code
-tiger
-cheetah
-leopard
-wolf
-This indicates that the model learned meaningful relationships between animals based on shared biological context.
-
- Results
-Successfully trained animal embeddings
-
-Generated logical and interpretable animal recommendations
-
-Demonstrated how Word2Vec can be applied beyond text
-
+The project demonstrates the flexibility of Word2Vec beyond text data
 
